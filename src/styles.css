@@ -1,0 +1,115 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Dark base */
+  --background: oklch(0.18 0.03 280);
+  --foreground: oklch(0.97 0.01 280);
+
+  --card: oklch(0.22 0.035 280);
+  --card-foreground: oklch(0.97 0.01 280);
+
+  --popover: oklch(0.22 0.035 280);
+  --popover-foreground: oklch(0.97 0.01 280);
+
+  --primary: oklch(0.68 0.21 295);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.28 0.05 285);
+  --secondary-foreground: oklch(0.97 0.01 280);
+
+  --muted: oklch(0.26 0.03 280);
+  --muted-foreground: oklch(0.72 0.03 280);
+
+  --accent: oklch(0.3 0.08 270);
+  --accent-foreground: oklch(0.97 0.01 280);
+
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.32 0.04 280 / 60%);
+  --input: oklch(0.28 0.04 280);
+  --ring: oklch(0.68 0.21 295);
+
+  --success: oklch(0.7 0.17 155);
+  --success-foreground: oklch(0.12 0.02 155);
+  --warning: oklch(0.82 0.16 85);
+  --warning-foreground: oklch(0.18 0.04 85);
+  --danger: oklch(0.65 0.23 25);
+  --danger-foreground: oklch(0.99 0 0);
+
+  --brand: oklch(0.68 0.22 300);
+  --brand-2: oklch(0.62 0.21 250);
+
+  --gradient-brand: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+  --gradient-bg: radial-gradient(1200px 600px at 10% -10%, oklch(0.32 0.13 290 / 60%), transparent 60%),
+                 radial-gradient(900px 500px at 110% 10%, oklch(0.28 0.13 250 / 55%), transparent 60%),
+                 linear-gradient(180deg, oklch(0.14 0.03 280) 0%, oklch(0.11 0.02 275) 100%);
+  --shadow-glow: 0 10px 40px -10px oklch(0.6 0.22 290 / 50%);
+}
+
+.dark { color-scheme: dark; }
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { min-height: 100%; }
+  body {
+    background: var(--gradient-bg);
+    color: var(--color-foreground);
+    font-feature-settings: "ss01", "cv11";
+  }
+}
+
+@utility text-gradient {
+  background-image: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-brand {
+  background-image: var(--gradient-brand);
+}
+
+@utility glow {
+  box-shadow: var(--shadow-glow);
+}
