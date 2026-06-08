@@ -2,6 +2,8 @@
 .env
 .env.local
 .env.*.local
+*.env
+.env.*
 
 # Logs
 logs
@@ -35,3 +37,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Misc
+.claude/
+*.pdf
+visualization.html
