@@ -594,108 +594,6 @@
       max-width: 560px;
     }
 
-    /* ── API key card ── */
-    .apikey-card {
-      width: 100%;
-      max-width: 680px;
-      background: linear-gradient(135deg, rgba(108,142,255,0.07), rgba(167,139,250,0.04));
-      border: 1px solid rgba(108,142,255,0.3);
-      border-radius: var(--radius);
-      padding: 22px 28px;
-      margin-bottom: 20px;
-    }
-
-    .apikey-card.saved {
-      border-color: rgba(52,211,153,0.35);
-      background: rgba(52,211,153,0.04);
-    }
-
-    .apikey-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .apikey-title {
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .apikey-status {
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 20px;
-    }
-
-    .apikey-status.ok  { background: rgba(52,211,153,0.15); color: var(--success); border: 1px solid rgba(52,211,153,0.3); }
-    .apikey-status.missing { background: rgba(248,113,113,0.12); color: var(--danger); border: 1px solid rgba(248,113,113,0.25); }
-
-    .apikey-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .apikey-input {
-      flex: 1;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 0.88rem;
-      font-family: 'Courier New', monospace;
-      padding: 10px 14px;
-      outline: none;
-      transition: border-color 0.2s;
-      min-width: 0;
-    }
-
-    .apikey-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(108,142,255,0.12); }
-    .apikey-input::placeholder { color: var(--muted); font-family: inherit; }
-
-    .apikey-save-btn {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 10px 18px;
-      cursor: pointer;
-      transition: opacity 0.2s;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .apikey-save-btn:hover { opacity: 0.85; }
-
-    .apikey-toggle-vis {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--muted);
-      font-size: 0.85rem;
-      padding: 10px 12px;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: border-color 0.15s;
-    }
-
-    .apikey-toggle-vis:hover { border-color: var(--accent); color: var(--accent); }
-
-    .apikey-hint {
-      margin-top: 8px;
-      font-size: 0.75rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .apikey-hint a { color: var(--accent); }
-
     /* ── Reminder settings panel ── */
     .rset-overlay {
       position: fixed;
@@ -1153,6 +1051,25 @@
   <p>Check supplement &amp; medication interactions and get personalized timing recommendations.</p>
 </header>
 
+<!-- API Key banner -->
+<div id="keyBanner" style="
+  width:100%;max-width:680px;margin-bottom:16px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px 20px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+  <span style="font-size:0.85rem;color:var(--muted);white-space:nowrap;">🔑 OpenRouter Key</span>
+  <input id="keyInput" type="password" placeholder="sk-or-v1-…"
+    style="flex:1;min-width:180px;background:var(--surface2);border:1px solid var(--border);
+    border-radius:8px;color:var(--text);font-family:monospace;font-size:0.85rem;
+    padding:8px 12px;outline:none;"
+    autocomplete="off" spellcheck="false" />
+  <button onclick="saveKey()"
+    style="background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;
+    border-radius:8px;color:#fff;font-size:0.85rem;font-weight:700;
+    padding:8px 16px;cursor:pointer;white-space:nowrap;">Save</button>
+  <span id="keyStatus" style="font-size:0.78rem;font-weight:700;"></span>
+</div>
+
 <!-- Streak bar -->
 <div class="streak-bar" id="streakBar">
   <div class="streak-flame" id="streakFlame">🔥</div>
@@ -1179,30 +1096,6 @@
      target="_blank" rel="noopener noreferrer">
     🛒 Browse Top Supplements
   </a>
-</div>
-
-<!-- API Key card -->
-<div class="apikey-card" id="apikeyCard">
-  <div class="apikey-header">
-    <span class="apikey-title">🔑 OpenRouter API Key</span>
-    <span class="apikey-status missing" id="apikeyStatus">Not set</span>
-  </div>
-  <div class="apikey-row">
-    <input
-      type="password"
-      class="apikey-input"
-      id="apikeyInput"
-      placeholder="sk-or-v1-…"
-      autocomplete="off"
-      spellcheck="false"
-    />
-    <button class="apikey-toggle-vis" onclick="toggleKeyVis()" title="Show/hide key">👁</button>
-    <button class="apikey-save-btn" onclick="saveApiKey()">Save</button>
-  </div>
-  <div class="apikey-hint">
-    Your key is stored only in this browser (localStorage) and never sent anywhere except OpenRouter.
-    Get a free key at <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai/keys</a>.
-  </div>
 </div>
 
 <!-- Input card -->
@@ -1796,67 +1689,6 @@
   function scheduleEveningReminder() { scheduleAllReminders(); }
 
   /* ═══════════════════════════════════════
-     API KEY MANAGEMENT
-  ═══════════════════════════════════════ */
-  const APIKEY_KEY = 'numedi_openrouter_key';
-
-  function getApiKey() {
-    return localStorage.getItem(APIKEY_KEY) || '';
-  }
-
-  function saveApiKey() {
-    const val = document.getElementById('apikeyInput').value.trim();
-    if (!val) { showToast('Please paste your API key first.'); return; }
-    if (!val.startsWith('sk-or-')) {
-      showToast('That doesn\'t look like an OpenRouter key (should start with sk-or-…)');
-      return;
-    }
-    localStorage.setItem(APIKEY_KEY, val);
-    renderApiKeyStatus();
-    showToast('✓ API key saved!');
-  }
-
-  function toggleKeyVis() {
-    const inp = document.getElementById('apikeyInput');
-    inp.type = inp.type === 'password' ? 'text' : 'password';
-  }
-
-  function renderApiKeyStatus() {
-    const key    = getApiKey();
-    const card   = document.getElementById('apikeyCard');
-    const status = document.getElementById('apikeyStatus');
-    const input  = document.getElementById('apikeyInput');
-
-    if (key) {
-      // Show only last 6 chars so the user can confirm which key is saved
-      input.value = '••••••••••••••••' + key.slice(-6);
-      input.type  = 'password';
-      status.textContent = '✓ Saved';
-      status.className   = 'apikey-status ok';
-      card.classList.add('saved');
-    } else {
-      input.value = '';
-      status.textContent = 'Not set';
-      status.className   = 'apikey-status missing';
-      card.classList.remove('saved');
-    }
-  }
-
-  // Clear masked value on focus so user can type a fresh key
-  document.getElementById('apikeyInput').addEventListener('focus', () => {
-    const inp = document.getElementById('apikeyInput');
-    if (inp.value.startsWith('••')) {
-      inp.value = '';
-      inp.type  = 'text';
-    }
-  });
-
-  // Allow Enter key to save
-  document.getElementById('apikeyInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') saveApiKey();
-  });
-
-  /* ═══════════════════════════════════════
      INTERACTION CHECKER
   ═══════════════════════════════════════ */
   function fill(text, fieldId) {
@@ -1865,12 +1697,11 @@
   }
 
   async function checkInteractions() {
-    if (!getApiKey()) {
-      showError('Please enter your OpenRouter API key above before checking interactions.');
-      document.getElementById('apikeyInput').focus();
+    if (!localStorage.getItem('numedi_api_key')) {
+      showError('상단에 OpenRouter API 키를 먼저 입력하고 Save를 눌러주세요.');
+      document.getElementById('keyInput').focus();
       return;
     }
-
     const supplements = document.getElementById('supplements').value.trim();
     const medications  = document.getElementById('medications').value.trim();
 
@@ -1911,7 +1742,7 @@ Be specific, evidence-based, and concise. Cover every item the user listed.`;
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + getApiKey(),
+          'Authorization': 'Bearer ' + (localStorage.getItem('numedi_api_key') || ''),
           'HTTP-Referer': window.location.href,
           'X-Title': 'NuMEDi Supplement Checker'
         },
@@ -2182,8 +2013,55 @@ Be specific, evidence-based, and concise. Cover every item the user listed.`;
     toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
   }
 
+  /* ═══════════════════════════════════════
+     API KEY
+  ═══════════════════════════════════════ */
+  function saveKey() {
+    const val = document.getElementById('keyInput').value.trim();
+    if (!val) { showToast('키를 입력해주세요.'); return; }
+    localStorage.setItem('numedi_api_key', val);
+    initKey();
+    showToast('✓ API 키 저장됨!');
+  }
+
+  function initKey() {
+    const saved = localStorage.getItem('numedi_api_key') || '';
+    const input  = document.getElementById('keyInput');
+    const status = document.getElementById('keyStatus');
+    const banner = document.getElementById('keyBanner');
+    if (saved) {
+      input.value       = saved.slice(0, 10) + '••••••' + saved.slice(-4);
+      input.type        = 'text';
+      status.textContent = '✓ 저장됨';
+      status.style.color = 'var(--success)';
+      banner.style.borderColor = 'rgba(52,211,153,0.35)';
+    } else {
+      input.value       = '';
+      input.type        = 'password';
+      status.textContent = '미입력';
+      status.style.color = 'var(--danger)';
+      banner.style.borderColor = 'rgba(248,113,113,0.3)';
+    }
+  }
+
+  // Click into the field → clear to let user re-paste
+  document.getElementById('keyInput').addEventListener('focus', function() {
+    const saved = localStorage.getItem('numedi_api_key') || '';
+    if (saved) { this.value = ''; this.type = 'password'; }
+  });
+
+  // Blur without saving → restore display
+  document.getElementById('keyInput').addEventListener('blur', function() {
+    const saved = localStorage.getItem('numedi_api_key') || '';
+    if (saved && !this.value) initKey();
+  });
+
+  document.getElementById('keyInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') saveKey();
+  });
+
   /* ── init ── */
-  renderApiKeyStatus();
+  initKey();
   renderStreak();
   updateNotifToggle();
   // Re-arm any saved reminders on page load (timers don't survive refresh)
